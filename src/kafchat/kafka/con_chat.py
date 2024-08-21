@@ -1,6 +1,8 @@
 from kafka import KafkaConsumer
 from json import loads
 
+
+#컨슈머 생성
 consumer = KafkaConsumer(
         'chat',
         bootstrap_servers=['localhost:9092'],
@@ -10,13 +12,15 @@ consumer = KafkaConsumer(
         enable_auto_commit=True,
 )
 
+
 print("채팅 프로그램 - 메세지 수신")
 print("메세지 대기중...")
+
 
 try:
     for m in consumer:
         data = m.value
-        print(f"[FRIEND] {data['message']}")
+        print(f"[FRIEND] {data}")
 
 except KeyboardInterrupt:
     print("채팅 종료")
