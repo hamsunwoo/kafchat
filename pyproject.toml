@@ -1,7 +1,7 @@
 [project]
 name = "kafchat"
 version = "0.2.0"
-description = "Default template for PDM package"
+description = "Python chat program using Apache Kafka"
 authors = [
     {name = "sunwoo", email = "summerham22@gmail.com"},
 ]

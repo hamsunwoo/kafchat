@@ -1,8 +1,8 @@
 # kafchat
+- Python chat program using Apache Kafka
 
 ### Test
 ### Kafka producer
-
 ```bash
 $ python src/kafchat/kafka/pro.py
 [DONE]: 0.12326288223266602
