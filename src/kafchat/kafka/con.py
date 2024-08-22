@@ -18,28 +18,31 @@ def read_offset():
 saved_offset = read_offset()
 
 consumer = KafkaConsumer(
-        #"topic2",
+        "topic2",
         bootstrap_servers=['localhost:9092'],
         value_deserializer=lambda x: loads(x.decode('utf-8')),
         consumer_timeout_ms=5000,
-        #auto_offset_reset='earliest' if saved_offset is None else 'none',
+        auto_offset_reset='earliest' if saved_offset is None else 'none',
         group_id="fbi",
         enable_auto_commit=False,
 )
 
 print('[Start] get consumer')
 
-p = TopicPartition('topic2', 0)
-consumer.assign([p])
+#수동을 파티션 할당
+#p = TopicPartition('topic2', 0)
+#consumer.assign([p])
 
-if saved_offset is not None:
-    consumer.seek(p, saved_offset)
-else:
-    consumer.seek_to_beginning(p) #저장된 오프셋이 없으면 처음부터 읽기
+#if saved_offset is not None:
+#    consumer.seek(p, saved_offset)
+#else:
+#    consumer.seek_to_beginning(p) #저장된 오프셋이 없으면 처음부터 읽기
 
 for m in consumer:
     print(f"offset={m.offset}, value={m.value}")
     save_offset(m.offset + 1)
+
+    consumer.commit()
 
 print('[End] get consumer')
 
